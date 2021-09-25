@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background: #fafafa;
+    }
+
+    success-check {
+      transition: width 150ms ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo"></div>
+
+  <script type="module">
+    import { html, render } from 'lit';
+    import '../success-check.js';
+
+    function setWidth(width) {
+      const check = document.querySelector('success-check');
+      localStorage.setItem('width', width);
+      check.style.width = `${width}px`;
+    }
+
+    render(
+      html`
+        <div style="display: flex; align-items: center;">
+          <div style="padding:20px;">
+            <success-check
+              style="width: ${localStorage.getItem('width') || 20}px;"></success-check>
+          </div>
+          <div>
+          <button @click=${() => setWidth(20)}>20px</button>
+          <button @click=${() => setWidth(40)}>40px</button>
+          <button @click=${() => setWidth(60)}>60px</button>
+          <button @click=${() => setWidth(80)}>80px</button>
+          <button @click=${() => setWidth(100)}>100px</button>
+        </div>
+      `,
+      document.querySelector('#demo')
+    );
+  </script>
+</body>
+</html>
